@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html ng-app>
+<head>
+    <title>AngularJS Sorting &amp; Filtering Example</title>
+
+    <link rel="stylesheet" href="styling.css">
+    <!-- include the core AngularJS library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+    <script src="backend.js"></script>
+</head>
+
+<body ng-controller="ListOfBusStations">
+<h1>Bus routes search</h1>
+
+<form>
+    Leaving from: <input ng-model="searchText.from" type="text" pattern="^[a-zA-Z]+$">
+    Going to: <input ng-model="searchText.to">
+   <input type="submit">
+
+</form>
+
+<!---
+  use ngShow to detect whether filtered contacts exist
+  and display the table if they do
+--->
+<table class="stations" ng-show="(stations|filter:searchText).length">
+    <tr>
+        <th>from location</th>
+        <th>to location</th>
+    </tr>
+
+    <tr ng-repeat="station in stations|filter:searchText">
+        <td>{{station.from}}</td>
+        <td>{{station.to}}</td>
+    </tr>
+
+</table>
+</body>
+</html>
